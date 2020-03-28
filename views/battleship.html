@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+    <head>
+<!--        <link rel="stylesheet" href="styles.css">-->
+
+        <style>
+            #part1 {
+                display:grid;
+            }
+            .grid-item {
+                display:grid;
+            }
+            #ship-list {
+                text-align:right;
+                text-decoration-color: #039be5;
+            }
+        </style>
+    </head>
+
+    <body>
+
+        <h1>Battleship Game</h1>
+
+        <table id="part1">{Board}
+<!--            <tbody>-->
+
+<!--            </tbody>-->
+        </table>
+    <!--    This part will get updated to list the sunken Ships;-->
+        <ul id="ship-list"></ul>
+        <p id="part2"></p>
+        <p id="part3"></p>
+
+        <p id="part4"><button id="guess" type="button" onclick="setLink()">GUESS</button></p>
+
+        <p id="part5">Status</p>
+        <p id="part6"></p>
+        <p id="part7"></p>
+
+    <script type="text/javascript" >
+
+        function setLink() {
+
+            let x = getGuessX();
+            let y = getGuessY();
+
+            let guessURL = '/attack/';
+            var link = document.getElementById("guess");
+            link.setAttribute('href', guessURL + x + y);
+        }
+
+        // get user's X-coordinate guess;
+        function getGuessX() {
+            console.log("getGuessX");
+            let guessIsBad = true;
+            let guessX;
+            while (guessIsBad) {
+                guessX =  window.prompt("Enter your guess", "Number from 0 to 9");
+                if ((parseInt(guessX) >= 0 ) && (parseInt(guessX) <= 9)) {
+                    guessIsBad = false;
+                }
+            }
+            return parseInt(guessX);
+        }
+
+        // get user's Y-coordinate guess;
+        function getGuessY() {
+            alert("getGuessY");
+            let guessIsBad = true;
+            let guessY;
+            while (guessIsBad) {
+                guessY =  window.prompt("Enter your guess", "Number from 0 to 9");
+                if ((parseInt(guessY) >= 0 ) && (parseInt(guessY) <= 9)) {
+                    // Update guessIsBad to exit validation (while) loop;
+                    guessIsBad = false;
+                }
+            }
+            return parseInt(guessY);
+        }
+
+        let board = { Board };
+        document.getElementById("part1").innerHTML = board;
+        document.getElementById("part2").innerHTML = "<img src='../api/public/images/water.png' alt='1' height='100' width='100'>" ;
+
+        // document.getElementById("part2").innerHTML;
+        document.getElementById("part5").innerHTML = "Tries: " + countTries + "  Misses: " + countMisses + "  Hits:   " + countHits
+                + "  Ships sunk:  " + shipsSunk;
+        if (countTries > 8) {
+            document.getElementById("part6").innerHTML = "The ships ESCAPED!";
+        }
+        else if(shipsSunk === 5) {
+            document.getElementById("part6").innerHTML = "You sank the fleet of your nemesis.  Congratulations on your victory. ";
+        }
+
+    </script>
+
+    </body>
+</html>

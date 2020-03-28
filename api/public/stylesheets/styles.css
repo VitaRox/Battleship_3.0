@@ -1,0 +1,8 @@
+.part1 {
+    display:grid;
+}
+
+h1 {
+    align-content: center;
+    text-emphasis-color: #039be5;
+}
